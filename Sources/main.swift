@@ -1,6 +1,25 @@
 import Foundation
 import CoreGraphics
 
+let matrixA: [Float] = [
+    1,2,3,
+    4,5,6
+] //2*3
+
+let matrixB: [Float] = [
+    7,8,
+    9,10,
+    11,12
+] //3*2
+
+do {
+    let metalHandler = try MetalHandler(kernelName: "matrix_multiply", metalFileName: "./metal/kernels.metallib")
+    let result = metalHandler.matrixMultiplication(matrixA: matrixA, matrixB: matrixB, widthA: 3, widthB: 2)
+    print("Result: \(result)")
+} catch {
+    print("Metal error: \(error)")
+}
+
 let pathTrainingImages = "./mnist_database/train-images.idx3-ubyte"
 let pathTrainingLabels = "./mnist_database/train-labels.idx1-ubyte"
 let pathTestImages = "./mnist_database/t10k-images.idx3-ubyte"

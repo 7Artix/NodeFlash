@@ -1,0 +1,81 @@
+client:
+  name: basic
+  file-system: device-agnostic
+tools: {}
+targets:
+  "NodeFlash-arm64-apple-macosx14.0-debug.exe": ["<NodeFlash-arm64-apple-macosx14.0-debug.exe>"]
+  "NodeFlash-arm64-apple-macosx14.0-debug.module": ["<NodeFlash-arm64-apple-macosx14.0-debug.module>"]
+  "PackageStructure": ["<PackageStructure>"]
+  "main": ["<NodeFlash-arm64-apple-macosx14.0-debug.exe>","<NodeFlash-arm64-apple-macosx14.0-debug.module>"]
+  "test": ["<NodeFlash-arm64-apple-macosx14.0-debug.exe>","<NodeFlash-arm64-apple-macosx14.0-debug.module>"]
+default: "main"
+nodes:
+  "/Users/artix/Projects/NodeFlash/Sources/":
+    is-directory-structure: true
+    content-exclusion-patterns: [".git",".build"]
+  "/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash":
+    is-mutated: true
+commands:
+  "/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash-entitlement.plist":
+    tool: write-auxiliary-file
+    inputs: ["<entitlement-plist>","<com.apple.security.get-task-allow>"]
+    outputs: ["/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash-entitlement.plist"]
+    description: "Write auxiliary file /Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash-entitlement.plist"
+
+  "/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/sources":
+    tool: write-auxiliary-file
+    inputs: ["<sources-file-list>","/Users/artix/Projects/NodeFlash/Sources/cnn.swift","/Users/artix/Projects/NodeFlash/Sources/cnnmodule.swift","/Users/artix/Projects/NodeFlash/Sources/database.swift","/Users/artix/Projects/NodeFlash/Sources/filter.swift","/Users/artix/Projects/NodeFlash/Sources/image.swift","/Users/artix/Projects/NodeFlash/Sources/main.swift","/Users/artix/Projects/NodeFlash/Sources/metalHandler.swift","/Users/artix/Projects/NodeFlash/Sources/mnist.swift","/Users/artix/Projects/NodeFlash/Sources/nn.swift","/Users/artix/Projects/NodeFlash/Sources/nn_basis.swift"]
+    outputs: ["/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/sources"]
+    description: "Write auxiliary file /Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/sources"
+
+  "/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.product/Objects.LinkFileList":
+    tool: write-auxiliary-file
+    inputs: ["<link-file-list>","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/cnn.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/cnnmodule.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/database.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/filter.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/image.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/main.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/metalHandler.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/mnist.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/nn.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/nn_basis.swift.o"]
+    outputs: ["/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.product/Objects.LinkFileList"]
+    description: "Write auxiliary file /Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.product/Objects.LinkFileList"
+
+  "/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt":
+    tool: write-auxiliary-file
+    inputs: ["<swift-get-version>","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"]
+    outputs: ["/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"]
+    always-out-of-date: "true"
+    description: "Write auxiliary file /Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+
+  "<NodeFlash-arm64-apple-macosx14.0-debug.exe>":
+    tool: phony
+    inputs: ["<NodeFlash-arm64-apple-macosx14.0-debug.exe-CodeSigning>"]
+    outputs: ["<NodeFlash-arm64-apple-macosx14.0-debug.exe>"]
+
+  "<NodeFlash-arm64-apple-macosx14.0-debug.module>":
+    tool: phony
+    inputs: ["/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/cnn.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/cnnmodule.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/database.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/filter.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/image.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/main.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/metalHandler.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/mnist.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/nn.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/nn_basis.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/Modules/NodeFlash.swiftmodule"]
+    outputs: ["<NodeFlash-arm64-apple-macosx14.0-debug.module>"]
+
+  "C.NodeFlash-arm64-apple-macosx14.0-debug.exe":
+    tool: shell
+    inputs: ["/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/cnn.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/cnnmodule.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/database.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/filter.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/image.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/main.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/metalHandler.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/mnist.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/nn.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/nn_basis.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.product/Objects.LinkFileList"]
+    outputs: ["/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash"]
+    description: "Linking ./bin/arm64-apple-macosx/debug/NodeFlash"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-L","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug","-o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash","-module-name","NodeFlash","-Xlinker","-no_warn_duplicate_libraries","-emit-executable","-Xlinker","-alias","-Xlinker","_NodeFlash_main","-Xlinker","_main","-Xlinker","-rpath","-Xlinker","@loader_path","@/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.product/Objects.LinkFileList","-Xlinker","-rpath","-Xlinker","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-5.5/macosx","-target","arm64-apple-macosx11.0","-Xlinker","-add_ast_path","-Xlinker","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/Modules/NodeFlash.swiftmodule","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.1.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g"]
+
+  "C.NodeFlash-arm64-apple-macosx14.0-debug.exe-entitlements":
+    tool: shell
+    inputs: ["/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash-entitlement.plist"]
+    outputs: ["<NodeFlash-arm64-apple-macosx14.0-debug.exe-CodeSigning>"]
+    description: "Applying debug entitlements to ./bin/arm64-apple-macosx/debug/NodeFlash"
+    args: ["codesign","--force","--sign","-","--entitlements","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash-entitlement.plist","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash"]
+
+  "C.NodeFlash-arm64-apple-macosx14.0-debug.module":
+    tool: shell
+    inputs: ["/Users/artix/Projects/NodeFlash/Sources/cnn.swift","/Users/artix/Projects/NodeFlash/Sources/cnnmodule.swift","/Users/artix/Projects/NodeFlash/Sources/database.swift","/Users/artix/Projects/NodeFlash/Sources/filter.swift","/Users/artix/Projects/NodeFlash/Sources/image.swift","/Users/artix/Projects/NodeFlash/Sources/main.swift","/Users/artix/Projects/NodeFlash/Sources/metalHandler.swift","/Users/artix/Projects/NodeFlash/Sources/mnist.swift","/Users/artix/Projects/NodeFlash/Sources/nn.swift","/Users/artix/Projects/NodeFlash/Sources/nn_basis.swift","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/sources"]
+    outputs: ["/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/cnn.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/cnnmodule.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/database.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/filter.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/image.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/main.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/metalHandler.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/mnist.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/nn.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/nn_basis.swift.o","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/Modules/NodeFlash.swiftmodule"]
+    description: "Compiling Swift Module 'NodeFlash' (10 sources)"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-module-name","NodeFlash","-emit-dependencies","-emit-module","-emit-module-path","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/Modules/NodeFlash.swiftmodule","-output-file-map","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/output-file-map.json","-incremental","-c","@/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/NodeFlash.build/sources","-I","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/Modules","-target","arm64-apple-macosx11.0","-enable-batch-mode","-index-store-path","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/index/store","-Onone","-enable-testing","-j8","-DSWIFT_PACKAGE","-DDEBUG","-module-cache-path","/Users/artix/Projects/NodeFlash/bin/arm64-apple-macosx/debug/ModuleCache","-parseable-output","-Xfrontend","-entry-point-function-name","-Xfrontend","NodeFlash_main","-color-diagnostics","-swift-version","6","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.1.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g","-Xcc","-isysroot","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.1.sdk","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-Xcc","-fPIC","-Xcc","-g","-package-name","nodeflash"]
+
+  "PackageStructure":
+    tool: package-structure-tool
+    inputs: ["/Users/artix/Projects/NodeFlash/Sources/","/Users/artix/Projects/NodeFlash/Package.swift","/Users/artix/Projects/NodeFlash/Package.resolved"]
+    outputs: ["<PackageStructure>"]
+    description: "Planning build"
+    allow-missing-inputs: true
+
