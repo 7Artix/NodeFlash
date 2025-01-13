@@ -1,9 +1,9 @@
 struct Matrix<T: BinaryFloatingPoint> {
-    let width: Int
+    let height: Int
     var elements: [T]
 
-    var height: Int {
-        return elements.count / width
+    var width: Int {
+        return elements.count / height
     }
 
     var elements1Dim: [T] {
@@ -14,26 +14,26 @@ struct Matrix<T: BinaryFloatingPoint> {
         return elements.count
     }
 
-    init(width: Int, height: Int, initialValue: T = 0) {
-        self.width = width
+    init(height: Int, width: Int, initialValue: T = 0) {
+        self.height = height
         self.elements = Array(repeating: initialValue, count: width * height)
     }
 
-    init<U: BinaryFloatingPoint>(elements: [U], width: Int) {
-        assert(elements.count % width == 0, "Element count must be a multiple of width")
-        self.width = width
+    init<U: BinaryFloatingPoint>(elements: [U], height: Int) {
+        self.height = height
         self.elements = elements.map{ T($0) }
+        assert(elements.count % height == 0, "Element count must be a multiple of height")
     }
 
     init<U: BinaryFloatingPoint>(elements: [[U]]) {
         guard let firstRow = elements.first else {
             fatalError("The input array is empty.")
         }
-        let columnCount = firstRow.count
+        let rowCount = elements.count
         for row in elements {
-            precondition(row.count == columnCount, "All rows must have the same number of columns.")
+            precondition(row.count == firstRow.count, "All rows must have the same number of columns.")
         }
-        self.width = columnCount
+        self.height = rowCount
         self.elements = elements.flatMap { row in
             row.map { T($0) }
         }

@@ -1,23 +1,37 @@
 import Foundation
 import CoreGraphics
 
-let matrix = Matrix(width: 3, height: 2, initialValue: 0.0123456789)
-print(matrix)
+let matrixA: Matrix<Float> = Matrix(height: 2, width: 3, initialValue: 0.1)
+let matrixB: Matrix<Float> = Matrix(height: 2, width: 3, initialValue: 2.0)
+let matrixC: Matrix<Float> = Matrix(height: 3, width: 4, initialValue: 0.3)
+let matrixTest1: Matrix<Float> = Matrix(height: 1, width: 10240, initialValue: 0.12)
+let matrixTest2: Matrix<Float> = Matrix(height: 10240, width: 1, initialValue: 0.12)
+let matrixD: Matrix<Float> = Matrix(elements: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6], height: 1)
 
-let matrixA: [Float] = [
-    1,2,3,
-    4,5,6
-] //2*3
+let matrixHandler = MatrixHandler()
+print(matrixA)
+print(matrixB)
+print(matrixC)
+print(matrixHandler.matrixElementWise(matrixA: matrixA, matrixB: matrixB))
+print(matrixHandler.matrixMultiply(matrixA: matrixB, matrixB: matrixC))
+print(matrixD)
+let matrixDT = matrixHandler.matrixTranspose(matrixA: matrixD)
+print(matrixDT)
+let dateStart = Date()
+var matrix: Matrix<Float>
+matrix = matrixHandler.matrixMultiply(matrixA: matrixTest1, matrixB: matrixTest2)
+let numberOfTests = 50000
+for i in 0...numberOfTests {
+    matrix = matrixHandler.matrixMultiply(matrixA: matrixTest1, matrixB: matrixTest2)
+    //print(matrix)
+    print(String(format:"\r%.1f%%",Double(i)/Double(numberOfTests)*100),terminator: "")
+    fflush(stdout)
+}
+let dateEnd = Date()
+print("Time spent: \(dateEnd.timeIntervalSince(dateStart))")
 
-let matrixB: [Float] = [
-    7,8,
-    9,10,
-    11,12
-] //3*2
-
-let metalHandler = MatrixHandler()
-//let result = metalHandler.matrixMultiply(matrixA: matrixA, matrixB: matrixB, widthA: 3, widthB: 2)
-//print(result)
+print(matrixHandler.matrixElementWise(matrixA: matrixA, matrixB: matrixB))
+print(matrixHandler.matrixMultiply(matrixA: matrixB, matrixB: matrixC))
 
 let pathTrainingImages = "./mnist_database/train-images.idx3-ubyte"
 let pathTrainingLabels = "./mnist_database/train-labels.idx1-ubyte"
